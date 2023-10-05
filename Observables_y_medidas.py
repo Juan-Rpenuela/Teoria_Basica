@@ -15,6 +15,11 @@ def normal(v):
 def probSisLi(estado,pos):
     a = normal(estado)
     return ((modulo(estado[pos])**2/normal(estado)**2))
+def normalizar(v):
+    norma = normal(v)
+    for i in range(len(v)):
+        v[i] = v[i]*(1/norma)
+    return v
 #El sistema si se le da otro vector Ket debe buscar la probabilidad de transitar del primer vector al segundo.
 def transicion (ket1,ket2):
     a = lm.producintern(ket2,ket1)
@@ -24,19 +29,20 @@ def transicion (ket1,ket2):
 def prob_transi(v1,v2):
     p = lm.producintern(v2,v1)/ (normal(v1)*normal(v2))
     return modulo(p)
+
 def media(mat, ket):
     if normal(ket) != 1:
-        ket = normal(ket)
+        ket = normalizar(ket)
     resp = lm.hermitiana(mat)
     if resp == "No es hermitiana" or resp == "Tamaño incorrecto":
         return resp
     else:
-        final = lm.prod_interno(lm.sobrevector(mat, ket), ket)
+        final = lm.producintern(lm.accionmsobrev(mat, ket), ket)
         return final.real
     
 def varianza(mat, ket):
     if normal(ket) != 1:
-        ket = normal(ket)
+        ket = normalizar(ket)
     resp = lm.hermitiana(mat)
     if resp == "No es hermitiana" or resp == "Tamaño incorrecto":
         return resp
@@ -63,7 +69,7 @@ def vect_prop(mat):
 
 def transitar_vect_prop(mat, ket):
     if normal(ket) != 1:
-        ket = normal(ket)
+        ket = normalizar(ket)
     vectores = vect_prop(mat)
     prob = []
     for i in range(len(vectores)):
@@ -86,6 +92,5 @@ def final(seq, ket):
     else:
         return "No unitarias algunas matrices."
 
-print(probSisLi([2+1j,-1+2j,1j,1,3-1j,2,-2j,-2+1j,1-3j,-1j],7))
-print(modulo([2+1j,-1+2j,1j,1,3-1j,2,-2j,-2+1j,1-3j,-1j]))
+
 
