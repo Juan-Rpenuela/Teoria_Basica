@@ -1,6 +1,7 @@
 import numpy as np
 import Libcplxmat as lm
 import math
+import saltoalocuant as sac
 def modulo(c):
     return c.real**2+c.imag**2
 
@@ -91,28 +92,28 @@ def final(seq, ket):
     else:
         return "No unitarias algunas matrices."
 # 4.3.1
-print(vectores_propios([[0,1],[1,0]]))
+print(vect_prop([[0,1],[1,0]]))
 
 # 4.3.2
-print(transitar_a_vectores_propios([[0, 1], [1, 0]], [0, 1]))
-print(valores_propios([[0, 1], [1, 0]]))
+print(transitar_vect_prop([[0, 1], [1, 0]], [0, 1]))
+print(val_prop([[0, 1], [1, 0]]))
 print(media([[0, 1], [1, 0]], [0, 1]))
 
 # 4.4.1
 A =[[0,1],[1,0]]
 c = (2**(1/2))/2
 B = [[c,c],[c,-c]]
-multi = lvs.productoma(A,B)
-print(lvs.unitario(A))
-print(lvs.unitario(B))
-print(lvs.unitario(multi))
+multi = lm.productoma(A,B)
+print(lm.unitario(A))
+print(lm.unitario(B))
+print(lm.unitario(multi))
 
 # 4.4.2
 c = 1/math.sqrt(2)
 billar = [[0,c,c,0,],[1j*c,0,0,c],[c,0,0,1j*c],[0,c,-c,0]]
 billar1 = [[0,c,c,0,],[c,0,0,-c],[c,0,0,c],[0,-c,c,0]]
-state = scc.complejos(billar,[1,0,0,0],3)
-state1 = scc.calculo(billar1,[1,0,0,0],3)
+state = sac.cplx(billar,[1,0,0,0],3)
+state1 = sac.cplx(billar1,[1,0,0,0],3)
 print(state)
 print(state1)
 
